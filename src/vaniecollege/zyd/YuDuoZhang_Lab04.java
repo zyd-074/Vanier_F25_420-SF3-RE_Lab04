@@ -13,7 +13,16 @@ import javafx.stage.Stage;
  * https://github.com/zyd-074/Vanier_F25_420-SF3-RE_Lab04.git
  */
 public class YuDuoZhang_Lab04 extends Application {
-
+    // Text Fields Creation 
+    static TextField userTripDays = new TextField();
+    static TextField userAirfare = new TextField();
+    static TextField userCarRental = new TextField();
+    static TextField userMilesDriven = new TextField();
+    static TextField userParking = new TextField();
+    static TextField userTaxi = new TextField();
+    static TextField userRegistration = new TextField();
+    static TextField userLodging = new TextField();
+    
     /**
      * @param args the command line arguments
      */
@@ -23,6 +32,7 @@ public class YuDuoZhang_Lab04 extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Layout Initialize
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(15,15,15,15));
         GridPane elements = new GridPane();
@@ -35,6 +45,7 @@ public class YuDuoZhang_Lab04 extends Application {
         root.setCenter(elements);
         root.setBottom(buttons);
         
+        // Labels 
         Label tripDays = new Label("Days on the trip: ");
         Label airfare = new Label("Amount of airfare: ");
         Label carRental = new Label("Amount of car rental fees: ");
@@ -42,28 +53,23 @@ public class YuDuoZhang_Lab04 extends Application {
         Label parking = new Label("Amount of parking fees: ");
         Label taxi = new Label("Amount of txi charges: ");
         Label registration = new Label("Conference or seminar registration fees: ");
-        Label lodging = new Label("Lodging charges (per night): ");
+        Label lodging = new Label("Lodging charges: ");
         
-        TextField userTripDays = new TextField();
+        //Set Up TextFields
         userTripDays.setPromptText("Required");
-        TextField userAirfare = new TextField();
         userAirfare.setPromptText("Optional");
-        TextField userCarRental = new TextField();
         userCarRental.setPromptText("Optional");
-        TextField userMilesDriven = new TextField();
         userMilesDriven.setPromptText("If used private car");
-        TextField userParking = new TextField();
         userParking.setPromptText("Optional");
-        TextField userTaxi = new TextField();
         userTaxi.setPromptText("Optional");
-        TextField userRegistration = new TextField();
         userRegistration.setPromptText("Optional");
-        TextField userLodging = new TextField();
         userLodging.setPromptText("Per night");
         
+        // Buttons
         Button calculate = new Button("Calculate");
         Button clear = new Button("Clear");
         
+        // Set up Elements
         elements.setAlignment(Pos.CENTER);
         elements.add(tripDays, 0, 0);
         elements.add(airfare, 0, 1);
@@ -85,10 +91,27 @@ public class YuDuoZhang_Lab04 extends Application {
         
         buttons.getChildren().addAll(calculate, clear);
         
+        // Actin Handler for Clear button
+        clear.setOnAction( e -> clear());
+        
+        // Stage 
         Scene scene = new Scene(root, 600, 400);
         stage.setScene(scene);
         stage.setTitle("Travel Expenses Calculator");
         stage.show();
     }
     
+    /**
+     * Clears all TextFields on the input section. 
+     */
+    public static void clear() {
+        userTripDays.setText("");
+        userAirfare.setText("");
+        userCarRental.setText("");
+        userMilesDriven.setText("");
+        userParking.setText("");
+        userTaxi.setText("");
+        userRegistration.setText("");
+        userLodging.setText("");
+    }
 }
