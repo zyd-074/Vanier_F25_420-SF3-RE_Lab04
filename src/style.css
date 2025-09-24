@@ -1,0 +1,12 @@
+.label {
+    -fx-font-family: cursive;
+    -fx-font-size: 14pt;
+}
+
+.label-warning {
+    -fx-text-fill: tomato;
+}
+
+.button {
+    -fx-background-color: green;
+}

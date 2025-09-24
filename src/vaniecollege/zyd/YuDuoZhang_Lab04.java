@@ -201,6 +201,8 @@ public class YuDuoZhang_Lab04 extends Application {
         
         // Stage 
         Scene scene = new Scene(root, 600, 400);
+        scene.getStylesheets().add("style.css");
+        statusMessage.getStyleClass().add("label-warning");
         stage.setScene(scene);
         stage.setTitle("Travel Expenses Calculator");
         stage.show();
