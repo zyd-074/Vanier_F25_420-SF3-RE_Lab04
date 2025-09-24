@@ -186,8 +186,16 @@ public class YuDuoZhang_Lab04 extends Application {
                 // Meal
                 excess[3] = expenses[6] - allowed[6];
                 
-                double excessAmount = total(excess);
+                double excessAmount = (total(excess) < 0) ? 0 : total(excess);
                 double amountSaved = totalExpense - excessAmount;
+                
+                VBox money = new VBox();
+                Label expenseAmount = new Label("Your total expense is : " + totalExpense);
+                Label allowedAmount = new Label("Your allowed amount is : " + allowedExpense);
+                Label userExcess = new Label("Your excess amount is : " + excessAmount);
+                Label userSaved = new Label("You saved : " + amountSaved);
+                money.getChildren().addAll(expenseAmount, allowedAmount, userExcess, userSaved);
+                root.setCenter(money);
             }
         });
         
