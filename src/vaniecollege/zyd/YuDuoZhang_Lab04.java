@@ -51,7 +51,7 @@ public class YuDuoZhang_Lab04 extends Application {
         Label carRental = new Label("Amount of car rental fees: ");
         Label milesDriven = new Label("Number of miles driven: ");
         Label parking = new Label("Amount of parking fees: ");
-        Label taxi = new Label("Amount of txi charges: ");
+        Label taxi = new Label("Amount of taxi charges: ");
         Label registration = new Label("Conference or seminar registration fees: ");
         Label lodging = new Label("Lodging charges: ");
         
@@ -121,12 +121,24 @@ public class YuDuoZhang_Lab04 extends Application {
     }
     
     public static double totalExpenses() {
-        double lodgingFee = Double.parseDouble(userLodging.getText()) * Integer.parseInt(userTripDays.getText());
-        double airfare = Double.parseDouble(userAirfare.getText());
-        double carRental = Double.parseDouble(userCarRental.getText());
-        double parking = Double.parseDouble(userParking.getText());
-        double taxi = Double.parseDouble(userTaxi.getText());
-        double registration = Double.parseDouble(userRegistration.getText());
+        double lodgingFee = (!userTripDays.getText().isBlank() && !userLodging.getText().isBlank()) 
+                ? (Double.parseDouble(userLodging.getText()) * Integer.parseInt(userTripDays.getText())) 
+                : 0;
+        double airfare = (!userAirfare.getText().isBlank() ) 
+                ? (Double.parseDouble(userAirfare.getText())) 
+                : 0;
+        double carRental = (!userCarRental.getText().isBlank() ) 
+                ? (Double.parseDouble(userCarRental.getText()))
+                : 0;
+        double parking = (!userParking.getText().isBlank() ) 
+                ? (Double.parseDouble(userParking.getText()))
+                : 0;
+        double taxi = (!userTaxi.getText().isBlank() ) 
+                ? (Double.parseDouble(userParking.getText()))
+                : 0;
+        double registration = (!userRegistration.getText().isBlank() )
+                ? (Double.parseDouble(userRegistration.getText()))
+                : 0;
         
         return lodgingFee + airfare + carRental + parking + taxi + registration;
     }
