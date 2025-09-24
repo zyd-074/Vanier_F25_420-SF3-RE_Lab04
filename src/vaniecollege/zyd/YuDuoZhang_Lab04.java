@@ -169,8 +169,25 @@ public class YuDuoZhang_Lab04 extends Application {
         
         // Action Handler for Calculate button
         calculate.setOnAction(e -> {
-            if (statusMessage.getText() != "Please enter numbers") {
-                System.out.println(totalExpenses(allExpenses()));
+            if (statusMessage.getText().equals("Please enter numbers")) {}
+            else {
+                double[] expenses = allExpenses();
+                double[] allowed = allowed();
+                double totalExpense = total(expenses);
+                double allowedExpense = total(allowed);
+                
+                double[] excess = new double[4];
+                // Lodging
+                excess[0] = expenses[0] - allowed[0];
+                // Parking
+                excess[1] = expenses[3] - allowed[3];
+                // Taxi
+                excess[2] = expenses[4] - allowed[4];
+                // Meal
+                excess[3] = expenses[6] - allowed[6];
+                
+                double excessAmount = total(excess);
+                double amountSaved = totalExpense - excessAmount;
             }
         });
         
@@ -201,7 +218,7 @@ public class YuDuoZhang_Lab04 extends Application {
      * @return Array with all expenses
      */
     public static double[] allExpenses() {
-        double[] allExpenses = new double[8];
+        double[] allExpenses = new double[7];
         
         // Lodging
         allExpenses[0] = (!userTripDays.getText().isBlank() && !userLodging.getText().isBlank()) 
@@ -231,25 +248,64 @@ public class YuDuoZhang_Lab04 extends Application {
         allExpenses[6] = (!userMeal.getText().isBlank())
                 ? (Double.parseDouble(userMeal.getText()))
                 : 0;
-        // Miles Driven
-        allExpenses[7] = (!userMilesDriven.getText().isBlank())
-                ? (Double.parseDouble(userMilesDriven.getText()) * 0.27)
-                : 0;
         
         return allExpenses;
     }
     
     /**
      * Calculates the total expense incurred by the business person
-     * @param allExpenses array of all expenses saved
-     * @return to total amount
+     * @param expenses array of all expenses saved
+     * @return total amount
      */
-    public static double totalExpenses(double[] allExpenses) {
+    public static double total(double[] expenses) {
         double result = 0;
-        for (double amount : allExpenses) {
+        for (double amount : expenses) {
             result += amount;
         }
         return result;
+    }
+    
+    /**
+     * Save all allowable amount in an array
+     * @return Array with all allowed expenses
+     */
+    public static double[] allowed() {
+        double[] allowable = new double[8];
+        
+        // Lodging
+        allowable[0] = (!userTripDays.getText().isBlank()) 
+                ? (95 * Integer.parseInt(userTripDays.getText())) 
+                : 0;
+        // Airfare
+        allowable[1] = (!userAirfare.getText().isBlank()) 
+                ? (Double.parseDouble(userAirfare.getText())) 
+                : 0;
+        // Car Rental
+        allowable[2] = (!userCarRental.getText().isBlank()) 
+                ? (Double.parseDouble(userCarRental.getText()))
+                : 0;
+        // Parking
+        allowable[3] = (!userTripDays.getText().isBlank()) 
+                ? (Double.parseDouble(userTripDays.getText()) * 10)
+                : 0;
+        // Taxi
+        allowable[4] = (!userTripDays.getText().isBlank()) 
+                ? (Double.parseDouble(userTripDays.getText()) * 20)
+                : 0;
+        // Registration
+        allowable[5] = (!userRegistration.getText().isBlank())
+                ? (Double.parseDouble(userRegistration.getText()))
+                : 0;
+        // Meal
+        allowable[6] = (!userTripDays.getText().isBlank())
+                ? (Double.parseDouble(userTripDays.getText()) * 37)
+                : 0;
+        // Miles Driven
+        allowable[7] = (!userMilesDriven.getText().isBlank())
+                ? (Double.parseDouble(userMilesDriven.getText()) * 0.27)
+                : 0;
+        
+        return allowable;
     }
     
     /**
