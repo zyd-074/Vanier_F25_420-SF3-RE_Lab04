@@ -22,6 +22,7 @@ public class YuDuoZhang_Lab04 extends Application {
     static TextField userTaxi = new TextField();
     static TextField userRegistration = new TextField();
     static TextField userLodging = new TextField();
+    static TextField userMeal = new TextField();
     static Label statusMessage = new Label();
     
     /**
@@ -57,6 +58,7 @@ public class YuDuoZhang_Lab04 extends Application {
         Label taxi = new Label("Amount of taxi charges: ");
         Label registration = new Label("Conference or seminar registration fees: ");
         Label lodging = new Label("Lodging charges: ");
+        Label meal = new Label("Amount for meal: ");
         
         //Set Up TextFields
         userTripDays.setPromptText("Required");
@@ -67,6 +69,7 @@ public class YuDuoZhang_Lab04 extends Application {
         userTaxi.setPromptText("Optional");
         userRegistration.setPromptText("Optional");
         userLodging.setPromptText("Per night");
+        userMeal.setPromptText("Optional, in total");
         
         // Buttons
         Button calculate = new Button("Calculate");
@@ -82,6 +85,7 @@ public class YuDuoZhang_Lab04 extends Application {
         elements.add(taxi, 0, 5);
         elements.add(registration, 0, 6);
         elements.add(lodging, 0, 7);
+        elements.add(meal,0 , 8);
         
         elements.add(userTripDays, 1, 0);
         elements.add(userAirfare, 1, 1);
@@ -91,61 +95,69 @@ public class YuDuoZhang_Lab04 extends Application {
         elements.add(userTaxi, 1, 5);
         elements.add(userRegistration, 1, 6);
         elements.add(userLodging, 1, 7);
+        elements.add(userMeal, 1, 8);
         
         buttons.getChildren().addAll(calculate, clear);
         
         // Action Handler for typing letters in fields
         userTripDays.setOnKeyTyped(e -> {
-            if (checkField()) {
+            if (checkFields()) {
                 statusMessage.setText("Please enter numbers");
             } else {
                 statusMessage.setText("");
             }
         });
         userAirfare.setOnKeyTyped(e -> {
-            if (checkField()) {
+            if (checkFields()) {
                 statusMessage.setText("Please enter numbers");
             } else {
                 statusMessage.setText("");
             }
         });
         userCarRental.setOnKeyTyped(e -> {
-            if (checkField()) {
+            if (checkFields()) {
                 statusMessage.setText("Please enter numbers");
             } else {
                 statusMessage.setText("");
             }
         });
         userMilesDriven.setOnKeyTyped(e -> {
-            if (checkField()) {
+            if (checkFields()) {
                 statusMessage.setText("Please enter numbers");
             } else {
                 statusMessage.setText("");
             }
         });
         userParking.setOnKeyTyped(e -> {
-            if (checkField()) {
+            if (checkFields()) {
                 statusMessage.setText("Please enter numbers");
             } else {
                 statusMessage.setText("");
             }
         });
         userRegistration.setOnKeyTyped(e -> {
-            if (checkField()) {
+            if (checkFields()) {
                 statusMessage.setText("Please enter numbers");
             } else {
                 statusMessage.setText("");
             }
         });
         userLodging.setOnKeyTyped(e -> {
-            if (checkField()) {
+            if (checkFields()) {
                 statusMessage.setText("Please enter numbers");
             } else {
                 statusMessage.setText("");
             }
         });
         userTaxi.setOnKeyTyped(e -> {
-            if (checkField()) {
+            if (checkFields()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        userMeal.setOnKeyTyped(e -> {
+            if (checkFields()) {
                 statusMessage.setText("Please enter numbers");
             } else {
                 statusMessage.setText("");
@@ -158,7 +170,7 @@ public class YuDuoZhang_Lab04 extends Application {
         // Action Handler for Calculate button
         calculate.setOnAction(e -> {
             if (statusMessage.getText() != "Please enter numbers") {
-                System.out.println(totalExpenses());
+                System.out.println(totalExpenses(allExpenses()));
             }
         });
         
@@ -181,32 +193,65 @@ public class YuDuoZhang_Lab04 extends Application {
         userTaxi.setText("");
         userRegistration.setText("");
         userLodging.setText("");
+        userMeal.setText("");
     }
     
-    public static double totalExpenses() {
-        double lodgingFee = (!userTripDays.getText().isBlank() && !userLodging.getText().isBlank()) 
+    /**
+     * Get all expenses saved in an array
+     * @return Array with all expenses
+     */
+    public static double[] allExpenses() {
+        double[] allExpenses = new double[8];
+        
+        // Lodging
+        allExpenses[0] = (!userTripDays.getText().isBlank() && !userLodging.getText().isBlank()) 
                 ? (Double.parseDouble(userLodging.getText()) * Integer.parseInt(userTripDays.getText())) 
                 : 0;
-        double airfare = (!userAirfare.getText().isBlank() ) 
+        // Airfare
+        allExpenses[1] = (!userAirfare.getText().isBlank()) 
                 ? (Double.parseDouble(userAirfare.getText())) 
                 : 0;
-        double carRental = (!userCarRental.getText().isBlank() ) 
+        // Car Rental
+        allExpenses[2] = (!userCarRental.getText().isBlank()) 
                 ? (Double.parseDouble(userCarRental.getText()))
                 : 0;
-        double parking = (!userParking.getText().isBlank() ) 
+        // Parking
+        allExpenses[3] = (!userParking.getText().isBlank()) 
                 ? (Double.parseDouble(userParking.getText()))
                 : 0;
-        double taxi = (!userTaxi.getText().isBlank() ) 
-                ? (Double.parseDouble(userParking.getText()))
+        // Taxi
+        allExpenses[4] = (!userTaxi.getText().isBlank()) 
+                ? (Double.parseDouble(userTaxi.getText()))
                 : 0;
-        double registration = (!userRegistration.getText().isBlank() )
+        // Registration
+        allExpenses[5] = (!userRegistration.getText().isBlank())
                 ? (Double.parseDouble(userRegistration.getText()))
                 : 0;
+        // Meal
+        allExpenses[6] = (!userMeal.getText().isBlank())
+                ? (Double.parseDouble(userMeal.getText()))
+                : 0;
+        // Miles Driven
+        allExpenses[7] = (!userMilesDriven.getText().isBlank())
+                ? (Double.parseDouble(userMilesDriven.getText()))
+                : 0;
         
-        return lodgingFee + airfare + carRental + parking + taxi + registration;
+        return allExpenses;
     }
     
-    public static boolean checkField() {
+    public static double totalExpenses(double[] allExpenses) {
+        double result = 0;
+        for (double amount : allExpenses) {
+            result += amount;
+        }
+        return result;
+    }
+    
+    /**
+     * Checks if all fields contains letters
+     * @return True if does, false if not.
+     */
+    public static boolean checkFields() {
         boolean hasLetter = false;
         char[][] text = new char[8][];
         text[0] = userAirfare.getText().toCharArray();
