@@ -22,6 +22,7 @@ public class YuDuoZhang_Lab04 extends Application {
     static TextField userTaxi = new TextField();
     static TextField userRegistration = new TextField();
     static TextField userLodging = new TextField();
+    static Label statusMessage = new Label();
     
     /**
      * @param args the command line arguments
@@ -42,8 +43,10 @@ public class YuDuoZhang_Lab04 extends Application {
         HBox buttons = new HBox();
         buttons.setAlignment(Pos.CENTER);
         buttons.setSpacing(15);
+        BorderPane.setAlignment(statusMessage, Pos.CENTER);
         root.setCenter(elements);
         root.setBottom(buttons);
+        root.setTop(statusMessage);
         
         // Labels 
         Label tripDays = new Label("Days on the trip: ");
@@ -91,12 +94,72 @@ public class YuDuoZhang_Lab04 extends Application {
         
         buttons.getChildren().addAll(calculate, clear);
         
+        // Action Handler for typing letters in fields
+        userTripDays.setOnKeyTyped(e -> {
+            if (checkField()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        userAirfare.setOnKeyTyped(e -> {
+            if (checkField()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        userCarRental.setOnKeyTyped(e -> {
+            if (checkField()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        userMilesDriven.setOnKeyTyped(e -> {
+            if (checkField()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        userParking.setOnKeyTyped(e -> {
+            if (checkField()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        userRegistration.setOnKeyTyped(e -> {
+            if (checkField()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        userLodging.setOnKeyTyped(e -> {
+            if (checkField()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        userTaxi.setOnKeyTyped(e -> {
+            if (checkField()) {
+                statusMessage.setText("Please enter numbers");
+            } else {
+                statusMessage.setText("");
+            }
+        });
+        
         // Action Handler for Clear button
         clear.setOnAction( e -> clear());
         
         // Action Handler for Calculate button
         calculate.setOnAction(e -> {
-            System.out.println(totalExpenses());
+            if (statusMessage.getText() != "Please enter numbers") {
+                System.out.println(totalExpenses());
+            }
         });
         
         // Stage 
@@ -141,5 +204,28 @@ public class YuDuoZhang_Lab04 extends Application {
                 : 0;
         
         return lodgingFee + airfare + carRental + parking + taxi + registration;
+    }
+    
+    public static boolean checkField() {
+        boolean hasLetter = false;
+        char[][] text = new char[8][];
+        text[0] = userAirfare.getText().toCharArray();
+        text[1] = userCarRental.getText().toCharArray();
+        text[2] = userLodging.getText().toCharArray();
+        text[3] = userMilesDriven.getText().toCharArray();
+        text[4] = userParking.getText().toCharArray();
+        text[5] = userRegistration.getText().toCharArray();
+        text[6] = userTaxi.getText().toCharArray();
+        text[7] = userTripDays.getText().toCharArray();
+        
+        for (char[] array : text) {
+            for (char c : array) {
+                if (Character.isLetter(c)) {
+                    hasLetter = true;
+                }
+            }
+        }
+        
+        return hasLetter;
     }
 }
