@@ -233,12 +233,17 @@ public class YuDuoZhang_Lab04 extends Application {
                 : 0;
         // Miles Driven
         allExpenses[7] = (!userMilesDriven.getText().isBlank())
-                ? (Double.parseDouble(userMilesDriven.getText()))
+                ? (Double.parseDouble(userMilesDriven.getText()) * 0.27)
                 : 0;
         
         return allExpenses;
     }
     
+    /**
+     * Calculates the total expense incurred by the business person
+     * @param allExpenses array of all expenses saved
+     * @return to total amount
+     */
     public static double totalExpenses(double[] allExpenses) {
         double result = 0;
         for (double amount : allExpenses) {
