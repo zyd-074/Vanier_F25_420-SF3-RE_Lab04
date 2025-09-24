@@ -59,7 +59,7 @@ public class YuDuoZhang_Lab04 extends Application {
         userTripDays.setPromptText("Required");
         userAirfare.setPromptText("Optional");
         userCarRental.setPromptText("Optional");
-        userMilesDriven.setPromptText("If used private car");
+        userMilesDriven.setPromptText("Only for if used private car");
         userParking.setPromptText("Optional");
         userTaxi.setPromptText("Optional");
         userRegistration.setPromptText("Optional");
@@ -91,8 +91,13 @@ public class YuDuoZhang_Lab04 extends Application {
         
         buttons.getChildren().addAll(calculate, clear);
         
-        // Actin Handler for Clear button
+        // Action Handler for Clear button
         clear.setOnAction( e -> clear());
+        
+        // Action Handler for Calculate button
+        calculate.setOnAction(e -> {
+            System.out.println(totalExpenses());
+        });
         
         // Stage 
         Scene scene = new Scene(root, 600, 400);
@@ -113,5 +118,16 @@ public class YuDuoZhang_Lab04 extends Application {
         userTaxi.setText("");
         userRegistration.setText("");
         userLodging.setText("");
+    }
+    
+    public static double totalExpenses() {
+        double lodgingFee = Double.parseDouble(userLodging.getText()) * Integer.parseInt(userTripDays.getText());
+        double airfare = Double.parseDouble(userAirfare.getText());
+        double carRental = Double.parseDouble(userCarRental.getText());
+        double parking = Double.parseDouble(userParking.getText());
+        double taxi = Double.parseDouble(userTaxi.getText());
+        double registration = Double.parseDouble(userRegistration.getText());
+        
+        return lodgingFee + airfare + carRental + parking + taxi + registration;
     }
 }
