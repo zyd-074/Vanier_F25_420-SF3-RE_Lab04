@@ -1,12 +1,20 @@
 .label {
-    -fx-font-family: cursive;
-    -fx-font-size: 14pt;
+    -fx-font-family: "Times New Roman";
+    -fx-font-size: 12pt;
 }
 
 .label-warning {
     -fx-text-fill: tomato;
+    -fx-font-size: 14pt;
 }
 
-.button {
+.button-calculate {
     -fx-background-color: green;
+    -fx-text-fill: white;
+}
+
+.button-clear {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+
 }

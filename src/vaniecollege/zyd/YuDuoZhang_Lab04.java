@@ -1,5 +1,6 @@
 package vaniecollege.zyd;
 
+import java.util.Arrays;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -73,7 +74,9 @@ public class YuDuoZhang_Lab04 extends Application {
         
         // Buttons
         Button calculate = new Button("Calculate");
+        calculate.getStyleClass().add("button-calculate");
         Button clear = new Button("Clear");
+        clear.getStyleClass().add("button-clear");
         
         // Set up Elements
         elements.setAlignment(Pos.CENTER);
@@ -295,11 +298,11 @@ public class YuDuoZhang_Lab04 extends Application {
                 ? (Double.parseDouble(userCarRental.getText()))
                 : 0;
         // Parking
-        allowable[3] = (!userTripDays.getText().isBlank()) 
+        allowable[3] = (!userParking.getText().isBlank()) 
                 ? (Double.parseDouble(userTripDays.getText()) * 10)
                 : 0;
         // Taxi
-        allowable[4] = (!userTripDays.getText().isBlank()) 
+        allowable[4] = (!userTaxi.getText().isBlank()) 
                 ? (Double.parseDouble(userTripDays.getText()) * 20)
                 : 0;
         // Registration
@@ -307,7 +310,7 @@ public class YuDuoZhang_Lab04 extends Application {
                 ? (Double.parseDouble(userRegistration.getText()))
                 : 0;
         // Meal
-        allowable[6] = (!userTripDays.getText().isBlank())
+        allowable[6] = (!userMeal.getText().isBlank())
                 ? (Double.parseDouble(userTripDays.getText()) * 37)
                 : 0;
         // Miles Driven
